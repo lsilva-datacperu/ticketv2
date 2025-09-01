@@ -42,22 +42,21 @@
         <h3>Estadísticas Rápidas</h3>
         <div class="stats-grid">
             <div class="stat-item">
-                <span class="stat-number">--</span>
+                <span class="stat-number"><?php echo htmlspecialchars($stats['total'] ?? 0); ?></span>
                 <span class="stat-label">Total Tickets</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">--</span>
+                <span class="stat-number"><?php echo htmlspecialchars($stats['abiertos'] ?? 0); ?></span>
                 <span class="stat-label">Abiertos</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">--</span>
+                <span class="stat-number"><?php echo htmlspecialchars($stats['en_proceso'] ?? 0); ?></span>
                 <span class="stat-label">En Proceso</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">--</span>
+                <span class="stat-number"><?php echo htmlspecialchars($stats['resueltos'] ?? 0); ?></span>
                 <span class="stat-label">Resueltos</span>
             </div>
         </div>
-        <small><em>* Las estadísticas se implementarán en una versión futura</em></small>
     </div>
 </div>

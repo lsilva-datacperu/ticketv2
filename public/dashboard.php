@@ -31,9 +31,15 @@ if (isset($_GET['error'])) {
     }
 }
 
+require_once __DIR__ . '/../src/models/Ticket.php';
+
 // Preparar los datos para la vista
 $user_name = $_SESSION['user_nombre'];
 $user_rol = $_SESSION['user_rol'];
+
+// Obtener estadísticas
+$ticketModel = new Ticket();
+$stats = $ticketModel->getTicketStatistics();
 
 // Configurar la vista
 $page_title = 'Dashboard';
