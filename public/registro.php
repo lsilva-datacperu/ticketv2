@@ -8,12 +8,9 @@ session_start();
 require_once __DIR__ . '/../src/models/Usuario.php';
 require_once __DIR__ . '/../config/database.php';
 
-// Debug: mostrar que el archivo se está ejecutando
-echo "<!-- DEBUG: registro.php iniciado -->\n";
 
 // Si el usuario ya está logueado, redirigir al dashboard
 if (isset($_SESSION['user_id'])) {
-    echo "<!-- DEBUG: Usuario ya logueado, redirigiendo -->\n";
     header('Location: dashboard.php');
     exit();
 }
