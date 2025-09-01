@@ -116,5 +116,36 @@ class Ticket extends Database {
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    /**
+     * Obtiene estadísticas de los tickets.
+     * @return array Un array con las estadísticas.
+     */
+    public function getTicketStatistics() {
+        $sql = "SELECT
+                    COUNT(*) as total,
+                    SUM(CASE WHEN estado = 'abierto' THEN 1 ELSE 0 END) as abiertos,
+                    SUM(CASE WHEN estado = 'en_proceso' THEN 1 ELSE 0 END) as en_proceso,
+                    SUM(CASE WHEN estado = 'resuelto' THEN 1 ELSE 0 END) as resueltos
+                FROM tickets";
+
+        $result = $this->conn->query($sql);
+
+        if ($result) {
+            $stats = $result->fetch_assoc();
+            // Asegurarse de que los valores nulos se traten como 0
+            $stats['abiertos'] = (int) $stats['abiertos'];
+            $stats['en_proceso'] = (int) $stats['en_proceso'];
+            $stats['resueltos'] = (int) $stats['resueltos'];
+            return $stats;
+        } else {
+            return [
+                'total' => 0,
+                'abiertos' => 0,
+                'en_proceso' => 0,
+                'resueltos' => 0
+            ];
+        }
+    }
 }
 ?>

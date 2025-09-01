@@ -65,6 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $nombre_unico = uniqid() . '-' . $nombre_original;
                     $ruta_destino = $uploadDir . $nombre_unico;
 
+                    // Asegurarse de que el directorio de subida existe
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0755, true);
+                    }
+
                     if (move_uploaded_file($_FILES['adjunto']['tmp_name'], $ruta_destino)) {
                         $ticketModel->addAttachment($ticket_id, 'uploads/' . $nombre_unico, $nombre_original);
                         // Todo salió bien, redirigir
